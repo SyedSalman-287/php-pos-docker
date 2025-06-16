@@ -1,0 +1,25 @@
+services:
+  mysql:
+    image: syedsalman2878/custom-mysql:latest
+    container_name: mysql-container_docker_compose
+    ports:
+      - "3307:3306"  # Exposes DB on localhost:3307
+    networks:
+      - pos-network
+
+  app:
+    build: ./app
+    image: syedsalman2878/php-pos-app:latest
+    container_name: php-pos-app_docker_compose
+    depends_on:
+      - mysql
+    environment:
+      - DB_HOST=mysql
+    ports:
+      - "8081:80"  # App will be available on localhost:8080
+    networks:
+      - pos-network
+
+networks:
+  pos-network:
+    driver: bridge
