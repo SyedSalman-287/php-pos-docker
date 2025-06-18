@@ -8,7 +8,6 @@ services:
       - pos-network
 
   app:
-    build: ./app
     image: syedsalman2878/php-pos-app:latest
     container_name: php-pos-app_docker_compose
     depends_on:
